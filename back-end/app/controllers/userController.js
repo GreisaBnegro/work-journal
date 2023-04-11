@@ -102,7 +102,48 @@ controller.createNew = async function (req, res) {
 };
 
 /// update user
+controller.editAt = async function (req, res) {
+    try {
+        await user
+            .findAll({ where: { ID: req.body.id } })
+            .then(async (result) => {
+                if (result.length > 0) {
+                    await user.update(
+                        {
+                            FullName: req.body.fullname,
+                        },
+                        { where: { ID: req.body.id } }
+                    ).then((updateResult) => {
+                        res.status(200).json({
+                            message: "update successful",
+                            data: updateResult,
+                        });
+                    });
+                } else {
+                    res.status(404).json({ message: "update failed" });
+                }
+            });
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+};
 
 /// delete user
+controller.deleteUser = async function (req, res) {
+    try {
+        await user
+            .findAll({ where: { ID: req.body.id } })
+            .then(async (result) => {
+                if (result.length > 0) {
+                    await user.destroy({ where: { ID: req.body.id } });
+                    res.status(200).json({ message: "delete user successfully" });
+                } else {
+                    res.status(404).json({ message: "user not found" });
+                }
+            });
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+};
 
 module.exports = controller;
