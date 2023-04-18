@@ -4,7 +4,8 @@
   "description": "This is the backend for work journal",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "author": "GBK",
   "license": "ISC",
