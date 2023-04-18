@@ -21,7 +21,12 @@ model.device.hasMany(model.problem, { foreignKey: 'DeviceTypeID', sourceKey: 'ID
 model.problem.belongsTo(model.device, { foreignKey: 'DeviceTypeID' });
 
 model.user.hasMany(model.problem, { foreignKey: 'UserId' });
+model.user.hasMany(model.execution, { foreignKey: 'UserId' });
 model.problem.belongsTo(model.user, { foreignKey: 'UserId' });
+model.execution.belongsTo(model.user, { foreignKey: 'UserId' });
+
+model.status.hasMany(model.execution, { foreignKey: 'StatusID' });
+model.execution.belongsTo(model.status, { foreignKey: 'StatusID' });
 
 model.source.hasMany(model.problem, { foreignKey: 'SourceId' });
 model.problem.belongsTo(model.source, { foreignKey: 'SourceId' });
