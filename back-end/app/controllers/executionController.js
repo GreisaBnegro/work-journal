@@ -24,4 +24,26 @@ controller.getAll = async function (req, res) {
     }
 };
 
+controller.createNew = async function (req, res) {
+    try {
+        // req.body. ..
+        await execution
+            .create({
+                Action: req.body.actionName,
+                StatusID: req.body.status,
+                ExecutionDate: req.body.ExecutionDate,
+                ExecuteTime: req.body.ExecuteTime,
+                UserId: req.body.actionuser
+            })
+            .then((result) => {
+                res.status(201).json({
+                    message: "execution successfully created", data: result,
+                });
+            });
+
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+};
+
 module.exports = controller;
